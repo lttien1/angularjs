@@ -1,0 +1,17 @@
+.im-login {
+  background-color:rgba(0,0,0,0.2);
+  /* height: 100%; */
+  min-height: 100vh;
+  height: 100vh;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.im-login .im-login-form {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  background-color: #ffffff;
+  border-left: 1px solid #ededed;
+  padding: 20px;
+}
