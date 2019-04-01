@@ -1,0 +1,24 @@
+.im-sidebar {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+}
+.im-sidebar .mat-drawer {
+  background-color: #9c27b0;
+  width: 80px;
+}
+.im-sidebar .mat-drawer-side {
+  border-right: 0;
+}
+.im-sidebar .mat-drawer-content {
+  flex: 1;
+}
+.im-sidebar .im-btn-toggle {
+  width: 100%;
+  height: 56px;
+  border-radius: 0;
+  background-color: #303303;
+}
+.im-sidebar .im-body {
+  padding: 10px;
+}
