@@ -1,3 +1,19 @@
-.im-dashboard .im-table {
+.im-dashboard {
+  display: flex;
+}
+.im-dashboard .im-right-content {
+  width: 300px;
+}
+.im-dashboard .im-left-content {
+  flex: 1;
+  margin-right: 10px;
+}
+.im-dashboard .im-left-content table {
   width: 100%;
+}
+.im-dashboard .im-right-content .mat-form-field {
+  width: 100%;
+}
+.im-dashboard .im-right-content .mat-tab-group {
+  height: 100%;
 }
