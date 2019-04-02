@@ -32,30 +32,26 @@ export class DashboardComponent {
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
   selection = new SelectionModel<PeriodicElement>(true, []);
 
-  /** Whether the number of selected elements matches the total number of rows. */
+  selectedRow = this.getSelectedRow();
+
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.data.length;
     return numSelected === numRows;
   }
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
     this.isAllSelected() ?
       this.selection.clear() :
       this.dataSource.data.forEach(row => this.selection.select(row));
   }
-  /** The label for the checkbox on the passed row */
   checkboxLabel(row?: PeriodicElement): string {
     if (!row) {
       return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
   }
-  getLatestRow() {
-    return this.selection.selected.length;
-  }
-  onToggle(row) {
-    this.selection.toggle(row);
-    console.log('@@@@@!!!!', this.getLatestRow());
+  getSelectedRow() {
+    const numSelected = this.selection.selected.length;
+    return this.selection.hasValue() ? this.selection.selected[numSelected - 1] : null;
   }
 }

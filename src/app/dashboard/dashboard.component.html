@@ -17,7 +17,7 @@
             <mat-checkbox
               color="primary"
               (click)="$event.stopPropagation()"
-              (change)="$event ? onToggle(row) : null"
+              (change)="$event ? selection.toggle(row) : null"
               [checked]="selection.isSelected(row)"
               [aria-label]="checkboxLabel(row)">
             </mat-checkbox>
@@ -48,24 +48,31 @@
     </div>
   </div>
   <div class="im-right-content">
-    <mat-tab-group backgroundColor="primary" color="primary" mat-stretch-tabs class="mat-elevation-z4">
+    <mat-tab-group backgroundColor="primary" color="primary" mat-stretch-tabs class="mat-elevation-z8">
       <mat-tab label="First">
-        <mat-form-field>
-          <mat-label>Outline form field</mat-label>
-          <input matInput placeholder="Placeholder">
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Outline form field</mat-label>
-          <input matInput placeholder="Placeholder">
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Outline form field</mat-label>
-          <input matInput placeholder="Placeholder">
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Outline form field</mat-label>
-          <input matInput placeholder="Placeholder">
-        </mat-form-field>
+        <div class="im-tab-content">
+          <div *ngIf="selection.isEmpty(); else elseBlock" class="im-no-selected"> 
+            <p>No row selected</p>
+          </div>
+          <ng-template #elseBlock>
+            <mat-form-field>
+              <mat-label>No.</mat-label>
+              <input matInput placeholder="No" [value]="getSelectedRow().position">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Name</mat-label>
+              <input matInput placeholder="Name" [value]="getSelectedRow().name">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Weight</mat-label>
+              <input matInput placeholder="Weight" [value]="getSelectedRow().weight">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Symbol</mat-label>
+              <input matInput placeholder="Symbol" [value]="getSelectedRow().symbol">
+            </mat-form-field>
+          </ng-template>
+        </div>
       </mat-tab>
     </mat-tab-group>
   </div>

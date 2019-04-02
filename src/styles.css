@@ -6,8 +6,6 @@ body {
   margin: 0 auto;
 }
 
-.im-app app-dashboard {
+.im-dashboard .im-right-content .mat-tab-body-wrapper {
   flex: 1;
-  display: flex;
-  flex-direction: column;
 }

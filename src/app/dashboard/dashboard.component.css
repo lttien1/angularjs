@@ -17,3 +17,15 @@
 .im-dashboard .im-right-content .mat-tab-group {
   height: 100%;
 }
+.im-dashboard .im-right-content .im-tab-content {
+  padding: 10px;
+  height: calc(100% - 20px);
+}
+.im-dashboard .im-right-content .im-tab-content .im-no-selected {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+
