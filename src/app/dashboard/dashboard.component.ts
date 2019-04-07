@@ -1,39 +1,44 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
+import { DashboardService } from './dashboard.service';
+import { Payload, ContactResponse, Contact } from '../interface';
+import _ from 'lodash';
+import { Field } from '../interface/field';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent {
-  displayedColumns: string[] = ['select', 'position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-  selection = new SelectionModel<PeriodicElement>(true, []);
+export class DashboardComponent implements OnInit {
 
-  selectedRow = this.getSelectedRow();
+  displayedColumns: string[];
+  dataSource;
+  selection = new SelectionModel<Contact>(true, []);
 
+  payload: Payload;
+  contactAndFields: ContactResponse;
+
+  constructor(private dashboardService: DashboardService) {
+    this.payload = {
+      customerId: '8a4324f0-40e7-11e9-90e8-df8f2c248da4',
+      shopId: '955094e2-40e7-11e9-86dd-89925f7acfe1'
+    };
+  }
+  ngOnInit() {
+    this.getContactAndFields();
+  }
+  getContactAndFields(): void {
+    this.dashboardService.getContactAndFields(this.payload)
+      .subscribe(response => {
+        this.contactAndFields = _.get(response, 'data');
+        const contacts = _.get(this.contactAndFields, 'searchResult.contacts');
+        this.dataSource = new MatTableDataSource<Contact>(contacts);
+        const showFormFields = (_.get(this.contactAndFields, 'formFields') || []).filter((field: Field) => field.show === true);
+        this.displayedColumns = showFormFields.map((field: Field) => field.name);
+      });
+  }
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.data.length;
@@ -44,11 +49,11 @@ export class DashboardComponent {
       this.selection.clear() :
       this.dataSource.data.forEach(row => this.selection.select(row));
   }
-  checkboxLabel(row?: PeriodicElement): string {
+  checkboxLabel(row?: Contact): string {
     if (!row) {
       return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
     }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row`;
   }
   getSelectedRow() {
     const numSelected = this.selection.selected.length;
