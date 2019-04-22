@@ -2,7 +2,7 @@
   <div class="im-dashboard">
     <div class="im-left-content">
       <div class="mat-elevation-z8">
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8">
           <ng-container matColumnDef="select">
             <th mat-header-cell *matHeaderCellDef>
               <mat-checkbox
@@ -23,6 +23,10 @@
               </mat-checkbox>
             </td>
           </ng-container>
+          <ng-container matColumnDef="{{column.id}}" *ngFor="let column of tableFields">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{column.name}}</th>
+            <td mat-cell *matCellDef="let element">{{ column.type === 'combobox' ? (element[column.id] | mapSelectItem: column) : element[column.id] }} </td>
+          </ng-container>
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"
             (click)="selection.toggle(row)">
@@ -39,21 +43,20 @@
               <p>No row selected</p>
             </div>
             <ng-template #elseBlock>
-              <mat-form-field>
-                <mat-label>No.</mat-label>
-                <input matInput placeholder="No" [value]="getSelectedRow().position">
-              </mat-form-field>
-              <mat-form-field>
-                <mat-label>Name</mat-label>
-                <input matInput placeholder="Name" [value]="getSelectedRow().name">
-              </mat-form-field>
-              <mat-form-field>
-                <mat-label>Weight</mat-label>
-                <input matInput placeholder="Weight" [value]="getSelectedRow().weight">
-              </mat-form-field>
-              <mat-form-field>
-                <mat-label>Symbol</mat-label>
-                <input matInput placeholder="Symbol" [value]="getSelectedRow().symbol">
+              <mat-form-field *ngFor="let formField of showFormFields" [ngSwitch]="formField.type">
+                <mat-label>{{ formField.name }}</mat-label>
+                <mat-select *ngSwitchCase="'combobox'" [(value)]="getSelectedRow()[formField.id]">
+                  <mat-option *ngFor="let option of formField.initValue" [value]="option.id">
+                    {{ option.value }}
+                  </mat-option>
+                </mat-select>
+                <div *ngSwitchCase="'date'">
+                  <input matInput [matDatepicker]="picker" placeholder="{{formField.name}}">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </div>
+                <textarea *ngSwitchCase="'text'" matInput placeholder="{{formField.name}}" [(value)]="getSelectedRow()[formField.id]"></textarea>
+                <input *ngSwitchDefault matInput placeholder="{{formField.name}}" [(value)]="getSelectedRow()[formField.id]" />
               </mat-form-field>
             </ng-template>
           </div>

@@ -11,6 +11,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeaderComponent } from './components/header/header.component';
 import { HeaderService } from './components/header/header.service';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { MapSelectItemPipe } from './pipes/map-select-item.pipe';
+import { ConvertUndefinedValuePipe } from './pipes/convert-undefined-value.pipe';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     LoginComponent,
     DashboardComponent,
     HeaderComponent,
-    SidebarComponent
+    SidebarComponent,
+    MapSelectItemPipe,
+    ConvertUndefinedValuePipe,
   ],
   imports: [
     BrowserModule,

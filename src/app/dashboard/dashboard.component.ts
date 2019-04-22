@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
 import { DashboardService } from './dashboard.service';
-import { Payload, ContactResponse, Contact } from '../interface';
+import { Payload, ContactResponse, Contact, Field } from '../interface';
 import _ from 'lodash';
-import { Field } from '../interface/field';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,6 +18,9 @@ export class DashboardComponent implements OnInit {
 
   payload: Payload;
   contactAndFields: ContactResponse;
+
+  tableFields: object[];
+  showFormFields: Array<Field>;
 
   constructor(private dashboardService: DashboardService) {
     this.payload = {
@@ -35,8 +37,10 @@ export class DashboardComponent implements OnInit {
         this.contactAndFields = _.get(response, 'data');
         const contacts = _.get(this.contactAndFields, 'searchResult.contacts');
         this.dataSource = new MatTableDataSource<Contact>(contacts);
-        const showFormFields = (_.get(this.contactAndFields, 'formFields') || []).filter((field: Field) => field.show === true);
-        this.displayedColumns = showFormFields.map((field: Field) => field.name);
+        this.showFormFields = (_.get(this.contactAndFields, 'formFields') || []).filter((field: Field) => field.show === true);
+        const tableColumns = this.showFormFields.map((field: Field) => field.id);
+        this.displayedColumns = ['select'].concat(tableColumns);
+        this.tableFields = _.get(this.contactAndFields, 'tableFields');
       });
   }
   isAllSelected() {
@@ -57,6 +61,7 @@ export class DashboardComponent implements OnInit {
   }
   getSelectedRow() {
     const numSelected = this.selection.selected.length;
-    return this.selection.hasValue() ? this.selection.selected[numSelected - 1] : null;
+    const selected = this.selection.hasValue() ? this.selection.selected[numSelected - 1] : null;
+    return selected;
   }
 }
