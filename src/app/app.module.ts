@@ -13,6 +13,10 @@ import { HeaderService } from './components/header/header.service';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { MapSelectItemPipe } from './pipes/map-select-item.pipe';
 import { ConvertUndefinedValuePipe } from './pipes/convert-undefined-value.pipe';
+import { CommonModule } from '@angular/common';
+import { SettingsComponent } from './settings/settings.component';
+import { ContactSettingComponent } from './settings/contact-setting/contact-setting.component';
+
 
 @NgModule({
   declarations: [
@@ -23,6 +27,8 @@ import { ConvertUndefinedValuePipe } from './pipes/convert-undefined-value.pipe'
     SidebarComponent,
     MapSelectItemPipe,
     ConvertUndefinedValuePipe,
+    SettingsComponent,
+    ContactSettingComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,7 +37,8 @@ import { ConvertUndefinedValuePipe } from './pipes/convert-undefined-value.pipe'
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    CommonModule
   ],
   providers: [
     HeaderService

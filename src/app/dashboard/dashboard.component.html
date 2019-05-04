@@ -3,33 +3,27 @@
     <div class="im-left-content">
       <div class="mat-elevation-z8">
         <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8">
-          <ng-container matColumnDef="select">
+          <ng-container matColumnDef="select" sticky>
             <th mat-header-cell *matHeaderCellDef>
-              <mat-checkbox
-                color="primary"
-                (change)="$event ? masterToggle() : null"
+              <mat-checkbox color="primary" (change)="$event ? masterToggle() : null"
                 [checked]="selection.hasValue() && isAllSelected()"
-                [indeterminate]="selection.hasValue() && !isAllSelected()"
-                [aria-label]="checkboxLabel()">
+                [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
               </mat-checkbox>
             </th>
             <td mat-cell *matCellDef="let row">
-              <mat-checkbox
-                color="primary"
-                (click)="$event.stopPropagation()"
-                (change)="$event ? selection.toggle(row) : null"
-                [checked]="selection.isSelected(row)"
+              <mat-checkbox color="primary" (click)="$event.stopPropagation()"
+                (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)"
                 [aria-label]="checkboxLabel(row)">
               </mat-checkbox>
             </td>
           </ng-container>
           <ng-container matColumnDef="{{column.id}}" *ngFor="let column of tableFields">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>{{column.name}}</th>
-            <td mat-cell *matCellDef="let element">{{ column.type === 'combobox' ? (element[column.id] | mapSelectItem: column) : element[column.id] }} </td>
+            <td mat-cell *matCellDef="let element">
+              {{ column.type === 'combobox' ? (element[column.id] | mapSelectItem: column) : element[column.id] }} </td>
           </ng-container>
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"
-            (click)="selection.toggle(row)">
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
           </tr>
         </table>
         <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
@@ -55,8 +49,10 @@
                   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                   <mat-datepicker #picker></mat-datepicker>
                 </div>
-                <textarea *ngSwitchCase="'text'" matInput placeholder="{{formField.name}}" [(value)]="getSelectedRow()[formField.id]"></textarea>
-                <input *ngSwitchDefault matInput placeholder="{{formField.name}}" [(value)]="getSelectedRow()[formField.id]" />
+                <textarea *ngSwitchCase="'text'" matInput placeholder="{{formField.name}}"
+                  [(value)]="getSelectedRow()[formField.id]"></textarea>
+                <input *ngSwitchDefault matInput placeholder="{{formField.name}}"
+                  [(value)]="getSelectedRow()[formField.id]" />
               </mat-form-field>
             </ng-template>
           </div>

@@ -1,3 +1,22 @@
-<mat-toolbar color="primary">
-  <button mat-button>Menu</button>
+<mat-toolbar color="primary" [ngSwitch]="router.url">
+  <button *ngSwitchCase="'/contacts'" mat-icon-button>
+    <mat-icon>contacts</mat-icon> Contacts
+  </button>
+  <button *ngSwitchCase="'/orders'" mat-icon-button>
+    <mat-icon>add_shopping_cart</mat-icon> Orders
+  </button>
+  <button *ngSwitchCase="'/products'" mat-icon-button>
+    <mat-icon>card_giftcard</mat-icon> Products
+  </button>
+  <button *ngSwitchCase="'/reports'" mat-icon-button>
+    <mat-icon>bar_chart</mat-icon> Reports
+  </button>
+  <mat-button-toggle-group *ngSwitchCase="'/settings'">
+    <mat-button-toggle value="bold" mat-icon-button>
+        <mat-icon>settings</mat-icon> General Settings
+      </mat-button-toggle>
+    <mat-button-toggle value="bold" mat-icon-button>
+      <mat-icon>edit</mat-icon> Property
+    </mat-button-toggle>
+  </mat-button-toggle-group>
 </mat-toolbar>

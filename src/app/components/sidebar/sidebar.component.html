@@ -4,31 +4,31 @@
       <mat-icon>format_indent_increase</mat-icon>
     </button>
     <mat-list>
-      <mat-list-item>
+      <mat-list-item routerLink="/contacts" [routerLinkActive]="['is-active']">
         <button mat-icon-button>
           <mat-icon>contacts</mat-icon>
         </button>
       </mat-list-item>
-      <mat-list-item>
+      <mat-list-item routerLink="/orders" [routerLinkActive]="['is-active']">
         <button mat-icon-button>
           <mat-icon>add_shopping_cart</mat-icon>
         </button>
       </mat-list-item>
-      <mat-list-item>
+      <mat-list-item routerLink="/products" [routerLinkActive]="['is-active']">
         <button mat-icon-button>
           <mat-icon>card_giftcard</mat-icon>
         </button>
       </mat-list-item>
-      <mat-list-item>
+      <mat-list-item routerLink="/reports" [routerLinkActive]="['is-active']">
         <button mat-icon-button>
           <mat-icon>bar_chart</mat-icon>
         </button>
       </mat-list-item>
-      <mat-list-item>
-          <button mat-icon-button>
-            <mat-icon>settings</mat-icon>
-          </button>
-        </mat-list-item>
+      <mat-list-item routerLink="/settings" [routerLinkActive]="['is-active']">
+        <button mat-icon-button>
+          <mat-icon>settings</mat-icon>
+        </button>
+      </mat-list-item>
     </mat-list>
   </mat-drawer>
   <mat-drawer-content>
