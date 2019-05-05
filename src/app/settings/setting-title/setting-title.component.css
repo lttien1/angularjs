@@ -1,0 +1,19 @@
+.im-setting-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2px 0;
+}
+
+.im-setting-title .im-title-left {
+  display: flex;
+  align-items: center;
+}
+.im-setting-title .im-title-left .mat-icon {
+  margin-right: 10px;
+}
+
+.im-setting-title h4 {
+  font-size: 24px;
+  margin: 0;
+}

@@ -1,0 +1,25 @@
+<div class="im-menu">
+  <ng-container *ngFor="let item of menus">
+    <a class="im-menu-item" [ngClass]="{'active': activeKey === item.key}" *ngIf="!item.childrens; else elseBlock"
+      (click)="selectMenu.emit(item.key)">
+      <mat-icon>{{item.icon}}</mat-icon>{{item.label}}
+    </a>
+    <ng-template #elseBlock>
+      <mat-accordion>
+        <mat-expansion-panel expanded>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <a class="im-menu-item" [ngClass]="{'active': activeKey === item.key}">
+                <mat-icon>{{item.icon}}</mat-icon>{{item.label}}
+              </a>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="im-sub-menu">
+            <a class="im-sub-menu-item" [ngClass]="{'active': activeKey === child.key}"
+              *ngFor="let child of item.childrens" (click)="selectMenu.emit(child.key)">{{child.label}}</a>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </ng-template>
+  </ng-container>
+</div>

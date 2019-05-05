@@ -1,3 +1,29 @@
-<p>
-  contact-setting works!
-</p>
+<div class="im-contact-setting">
+  <app-setting-title title="Contact Properties" (clickButton)="onAdd()"></app-setting-title>
+  <div class="im-setting-body">
+    <table mat-table matSort [dataSource]="contactFields" class="mat-elevation-z8">
+      <ng-container matColumnDef="{{item.id}}" *ngFor="let item of tableFields">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{item.name}}</th>
+        <td mat-cell *matCellDef="let element" [ngSwitch]="item.id">
+          <span *ngSwitchCase="'createdTime'">{{element[item.id] | date}}</span>
+          <span *ngSwitchCase="'required'">
+            <mat-checkbox [checked]="element[item.id]"></mat-checkbox>
+          </span>
+          <span *ngSwitchCase="'type'">{{element[item.id] | titlecase}}</span>
+          <span *ngSwitchDefault>{{element[item.id]}}</span>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="action" stickyEnd>
+        <th mat-header-cell *matHeaderCellDef>Action</th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button (click)="onEdit(element)">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+</div>

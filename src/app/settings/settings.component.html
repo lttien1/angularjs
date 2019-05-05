@@ -1,57 +1,12 @@
 <div class="im-settings mat-elevation-z8">
-  <mat-tab-group vertical>
-    <mat-tab>
-      <ng-template mat-tab-label>
-        <div class="im-mat-tab-label">
-          <mat-icon>contacts</mat-icon> Contacts
-        </div>
-      </ng-template>
-      <p>1233!</p>
-    </mat-tab>
-    <mat-tab>
-      <ng-template mat-tab-label>
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              <div class="im-mat-tab-label">
-                <mat-icon>add_shopping_cart</mat-icon> Orders
-              </div>
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <mat-list>
-            <mat-list-item>Order Status</mat-list-item>
-            <mat-list-item>Other Property</mat-list-item>
-          </mat-list>
-        </mat-expansion-panel>
-      </ng-template>
-      <p>123323</p>
-    </mat-tab>
-    <mat-tab>
-      <ng-template mat-tab-label>
-        <div class="im-mat-tab-label">
-          <mat-icon>card_giftcard</mat-icon> Products
-        </div>
-      </ng-template>
-      <p>13122332</p>
-    </mat-tab>
-  </mat-tab-group>
-  <!-- <div>
-      <mat-icon>contacts</mat-icon> contacts
-    </div>
-    <mat-accordion>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            <mat-icon>add_shopping_cart</mat-icon> Orders
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <mat-list>
-          <mat-list-item>Order Status</mat-list-item>
-          <mat-list-item>Other Property</mat-list-item>
-        </mat-list>
-      </mat-expansion-panel>
-    </mat-accordion>
-    <div>
-      <mat-icon>card_giftcard</mat-icon> Products
-    </div> -->
+  <mat-drawer-container [hasBackdrop]="false" >
+    <mat-drawer #drawer mode="side" [opened]="true">
+      <app-menu [activeKey]="activeKey" [menus]="menus" (selectMenu)="onSelectMenu($event)"></app-menu>
+    </mat-drawer>
+    <mat-drawer-content>
+      <div class="im-drawer-content" [ngSwitch]="activeKey">
+        <app-contact-setting *ngSwitchCase="'contacts'"></app-contact-setting>
+      </div>
+    </mat-drawer-content>
+  </mat-drawer-container>
 </div>

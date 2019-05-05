@@ -16,6 +16,9 @@ import { ConvertUndefinedValuePipe } from './pipes/convert-undefined-value.pipe'
 import { CommonModule } from '@angular/common';
 import { SettingsComponent } from './settings/settings.component';
 import { ContactSettingComponent } from './settings/contact-setting/contact-setting.component';
+import { ContactSettingDrawerComponent } from './settings/contact-setting/contact-setting-drawer/contact-setting-drawer.component';
+import { SettingTitleComponent } from './settings/setting-title/setting-title.component';
+import { MenuComponent } from './components/menu/menu.component';
 
 
 @NgModule({
@@ -29,6 +32,9 @@ import { ContactSettingComponent } from './settings/contact-setting/contact-sett
     ConvertUndefinedValuePipe,
     SettingsComponent,
     ContactSettingComponent,
+    ContactSettingDrawerComponent,
+    SettingTitleComponent,
+    MenuComponent,
   ],
   imports: [
     BrowserModule,

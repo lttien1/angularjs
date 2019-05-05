@@ -1,0 +1,52 @@
+.mat-expansion-panel {
+  box-shadow: none;
+  background-color: transparent;
+}
+
+.mat-expansion-panel .mat-expansion-panel-header {
+  padding: 0 10px 0 0;
+  font-size: 14px;
+}
+
+.mat-expansion-panel:not(.mat-expanded) .mat-expansion-panel-header:not([aria-disabled=true]):hover {
+  background-color: transparent;
+}
+
+.im-menu {
+  width: 200px;
+  height: 100%;
+  border-right: 1px solid rgba(255, 255, 255, .12);
+}
+
+.im-menu .im-menu-item {
+  display: flex;
+  align-items: center;
+  line-height: 40px;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 0 20px;
+}
+
+.im-menu .im-menu-item .mat-icon {
+  width: 14px;
+  height: 14px;
+  font-size: 14px;
+  margin-right: 5px;
+}
+
+.im-sub-menu {
+  display: flex;
+  flex-direction: column;
+  margin-right: -24px;
+}
+
+.im-sub-menu .im-sub-menu-item {
+  padding: 10px 0px 10px 15px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.im-menu .im-menu-item.active,
+.im-menu .im-sub-menu-item.active {
+  border-right: 2px solid #7b1fa2;
+}

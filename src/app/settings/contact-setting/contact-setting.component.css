@@ -1,0 +1,13 @@
+.im-setting-body {
+  margin-top: 30px;
+  overflow: auto;
+}
+
+.mat-column-action {
+  width: 50px;
+  text-align: center;
+}
+
+table {
+  width: 100%;
+}
