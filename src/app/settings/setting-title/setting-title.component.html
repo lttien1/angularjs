@@ -1,7 +1,7 @@
 <div class="im-setting-title">
   <div class="im-title-left">
-    <button mat-icon-button (click)="openToggle.emit()">
-      <mat-icon>format_indent_increase</mat-icon>
+    <button mat-icon-button (click)="toggleDrawer()">
+      <mat-icon>{{ isOpen ? 'format_indent_increase' :  'format_indent_decrease' }}</mat-icon>
     </button>
     <h4>{{ title }}</h4>
   </div>

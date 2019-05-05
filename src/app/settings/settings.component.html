@@ -1,6 +1,6 @@
 <div class="im-settings mat-elevation-z8">
   <mat-drawer-container [hasBackdrop]="false" >
-    <mat-drawer #drawer mode="side" [opened]="true">
+    <mat-drawer #drawer mode="side" opened>
       <app-menu [activeKey]="activeKey" [menus]="menus" (selectMenu)="onSelectMenu($event)"></app-menu>
     </mat-drawer>
     <mat-drawer-content>

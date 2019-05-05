@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { SettingsDrawerService } from '../settings-drawer.service';
 
 @Component({
   selector: 'app-setting-title',
@@ -6,17 +7,19 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./setting-title.component.css']
 })
 export class SettingTitleComponent implements OnInit {
-
+  isOpen = true;
   @Input()
   title: string;
 
   @Output()
   clickButton = new EventEmitter();
 
-  @Output()
-  openToggle = new EventEmitter();
-
-  constructor() { }
+  constructor(private settingsDrawerService: SettingsDrawerService) { }
   ngOnInit() {
+  }
+
+  toggleDrawer() {
+    this.isOpen = !this.isOpen;
+    this.settingsDrawerService.toggle();
   }
 }

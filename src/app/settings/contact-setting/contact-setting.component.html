@@ -26,4 +26,7 @@
     </table>
     <mat-paginator [pageSizeOptions]="[10, 20]" showFirstLastButtons></mat-paginator>
   </div>
+  <ng-container *ngIf="isOpen">
+    <app-contact-setting-drawer></app-contact-setting-drawer>
+  </ng-container>
 </div>
